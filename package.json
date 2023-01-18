@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node -r dotenv/config src/server.js",
     "dev": "nodemon --inspect=localhost:8001 src/server.js",
-    "seed": "node prisma/seed/index.js"
+    "seed": "node prisma/seed/index.js",
+    "test": "mocha tests/**/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "eslint": "^8.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "prisma": "^4.9.0"
   },
