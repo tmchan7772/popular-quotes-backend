@@ -1,10 +1,11 @@
 import express from 'express';
 
 import patchResponse from './middlewares/respond.js';
-import useErrorHandler from './middlewares/errorHandler.js';
-import usePublicInfoRoutes from './publicInfo/routes.js';
-import useUserRoutes from './user/routes.js';
-import useAuthorRoutes from './author/routes.js';
+import notFoundHandler from './middlewares/notFoundHandler.js';
+import errorHandler from './middlewares/errorHandler.js';
+import setupPublicInfoRoutes from './publicInfo/routes.js';
+import setupUserRoutes from './user/routes.js';
+import setupAuthorRoutes from './author/routes.js';
 
 function createApp() {
   const app = express();
@@ -13,11 +14,13 @@ function createApp() {
 
   app.use(patchResponse);
 
-  usePublicInfoRoutes(app);
-  useUserRoutes(app);
-  useAuthorRoutes(app);
+  setupPublicInfoRoutes(app);
+  setupUserRoutes(app);
+  setupAuthorRoutes(app);
 
-  app.use(useErrorHandler);
+  app.use(notFoundHandler);
+  app.use(errorHandler);
+
   return app;
 }
 

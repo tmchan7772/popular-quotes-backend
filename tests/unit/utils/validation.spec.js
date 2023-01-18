@@ -1,5 +1,5 @@
 import assert from 'assert';
-import validateRequiredFields from '../../src/utils/validation.js';
+import validateRequiredFields from '../../../src/utils/validation.js';
 
 describe('Utils.validation', () => {
   it('validateRequiredFields should return empty array', () => {
