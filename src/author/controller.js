@@ -5,9 +5,6 @@ import validateRequiredFields from '../utils/validation.js';
 
 /**
  * Get random author with a specific delay
- * @param  {} req
- * @param  {} res
- * @param  {} next
  */
 async function getRandomAuthorWithDelay(req, res, next) {
   try {
@@ -21,10 +18,7 @@ async function getRandomAuthorWithDelay(req, res, next) {
 
 /**
  * Get random quotes by authorId with a specific delay.
- * Throws error if no authorId is provided
- * @param  {} req
- * @param  {} res
- * @param  {} next
+ * Returns 400 if no authorId is provided
  */
 async function getRandomQuoteWithDelay(req, res, next) {
   try {

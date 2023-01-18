@@ -11,9 +11,6 @@ import {
  * Register new user.
  * Returns 400 if form is invalid.
  * Returns 409 if email is duplicated
- * @param  {} req
- * @param  {} res
- * @param  {} next
  */
 async function register(req, res, next) {
   try {
@@ -38,9 +35,6 @@ async function register(req, res, next) {
 /**
  * Login user.
  * Returns 400 if credentials are invalid
- * @param  {} req
- * @param  {} res
- * @param  {} next
  */
 async function login(req, res, next) {
   let isValidLogin;
@@ -70,9 +64,6 @@ async function login(req, res, next) {
 
 /**
  * Get current user profile
- * @param  {} req
- * @param  {} res
- * @param  {} next
  */
 async function profile(req, res, next) {
   try {
@@ -85,9 +76,6 @@ async function profile(req, res, next) {
 
 /**
  * Logout current user
- * @param  {} req
- * @param  {} res
- * @param  {} next
  */
 async function logout(req, res, next) {
   try {
