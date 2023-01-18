@@ -1,4 +1,4 @@
-import { getPublicInfo } from './controller.js';
+import getPublicInfo from './controller.js';
 
 function useRouter(app) {
   app.get('/info', getPublicInfo);

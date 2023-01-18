@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+import dbClient from '../database/client.js';
 import { hashString, verifyHash } from '../utils/hash.js';
 import generateToken from '../utils/token.js';
 import { USER_NOT_FOUND_ERROR, USER_ALREADY_EXISTS_ERROR } from '../constants.js';
-
-const prisma = new PrismaClient();
 
 /**
  * Get user data by email
@@ -11,7 +9,7 @@ const prisma = new PrismaClient();
  * @returns {Promise<object>} { id, email, fullname, password, salt }
  */
 async function getUserByEmail(email) {
-  const [user] = await prisma.user.findMany({
+  const [user] = await dbClient.user.findMany({
     where: {
       email: {
         equals: email,
@@ -54,7 +52,7 @@ async function register({ fullname, email, password }) {
   }
 
   const { salt, hash } = hashString(password);
-  return prisma.user.create({
+  return dbClient.user.create({
     data: {
       fullname,
       email,
@@ -73,7 +71,7 @@ async function createAuthToken(userId) {
   // TODO; implement token generation
   const { value, expiredIn } = generateToken();
 
-  const { value: token } = await prisma.token.upsert({
+  const { value: token } = await dbClient.token.upsert({
     where: {
       user_id: userId,
     },
@@ -97,7 +95,7 @@ async function createAuthToken(userId) {
  * @returns {Promise<object>} { userId: string } if a token is valid
  */
 async function verifyToken(token) {
-  const [userToken] = await prisma.token.findMany({
+  const [userToken] = await dbClient.token.findMany({
     where: {
       value: {
         equals: token,
@@ -122,7 +120,7 @@ async function verifyToken(token) {
  * @returns {Promise<void>}
  */
 async function logout(userId) {
-  await prisma.token.delete({
+  await dbClient.token.delete({
     where: {
       user_id: userId,
     },
@@ -135,7 +133,7 @@ async function logout(userId) {
  * @returns {Promise<object>} user data { id: number, fullname: string, email: string }
  */
 function getUserById(userId) {
-  return prisma.user.findUnique({
+  return dbClient.user.findUnique({
     where: {
       id: userId,
     },

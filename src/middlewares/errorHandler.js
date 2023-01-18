@@ -1,13 +1,16 @@
-// eslint-disable-next-line no-unused-vars
+/**
+ * Global error handler
+ * Respond with status 500 if not specified.
+ * Show default error message if err.message is not specified
+ * @param  {} err
+ * @param  {} _req
+ * @param  {} res
+ * @param  {} _next
+ */
 function useErrorHandler(err, _req, res, _next) {
-  // err stack should be stored somewhere with unique id
-  const errorId = `${Math.random()}`;
-  // eslint-disable-next-line no-console
-  console.error(errorId + err.stack);
-
   const errMessage = err.isCustom
     ? err.message
-    : `Error occured. Please send this code to administrator to fix: ${errorId}`;
+    : 'Some error occured. Please try again';
 
   res.status(err.status || 500).json({
     success: false,

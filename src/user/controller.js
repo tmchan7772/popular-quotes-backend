@@ -4,14 +4,22 @@ import {
   USER_ALREADY_EXISTS_ERROR,
   USER_NOT_FOUND_ERROR,
   WRONG_EMAIL_OR_PASSWORD,
-  USER_REGISTER_VALIDATION_ERROR,
+  FIELDS_EMPTY_VALIDATION_ERROR,
 } from '../constants.js';
 
+/**
+ * Register new user.
+ * Returns 400 if form is invalid.
+ * Returns 409 if email is duplicated
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
 async function register(req, res, next) {
   try {
     const inValidFields = validateRequiredFields(req.body, ['fullname', 'email', 'password']);
     if (inValidFields.length) {
-      next({ status: 400, isCustom: true, message: USER_REGISTER_VALIDATION_ERROR(inValidFields) });
+      next({ status: 400, isCustom: true, message: FIELDS_EMPTY_VALIDATION_ERROR(inValidFields) });
       return;
     }
 
@@ -27,6 +35,13 @@ async function register(req, res, next) {
   }
 }
 
+/**
+ * Login user.
+ * Returns 400 if credentials are invalid
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
 async function login(req, res, next) {
   let isValidLogin;
 
@@ -53,6 +68,12 @@ async function login(req, res, next) {
   }
 }
 
+/**
+ * Get current user profile
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
 async function profile(req, res, next) {
   try {
     const profileData = await userService.getUserById(req.userId);
@@ -62,6 +83,12 @@ async function profile(req, res, next) {
   }
 }
 
+/**
+ * Logout current user
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
 async function logout(req, res, next) {
   try {
     await userService.logout(req.userId);

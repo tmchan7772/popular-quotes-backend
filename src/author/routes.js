@@ -1,6 +1,9 @@
-const getCompanyInfo = require('./controller');
+import * as authorController from './controller.js';
+import verifyAuth from '../middlewares/auth.js';
 
-module.exports = function useRouter(app) {
-  app.get('/author', () => {});
-  app.get('/quotes', () => {});
-};
+function useRouter(app) {
+  app.get('/author', verifyAuth, authorController.getRandomAuthorWithDelay);
+  app.get('/quote', verifyAuth, authorController.getRandomQuoteWithDelay);
+}
+
+export default useRouter;

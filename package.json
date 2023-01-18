@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node -r dotenv/config src/server.js",
-    "dev": "nodemon --inspect=localhost:8001 src/server.js"
+    "dev": "nodemon --inspect=localhost:8001 src/server.js",
+    "seed": "node prisma/seed/index.js"
   },
   "author": "",
   "license": "ISC",
