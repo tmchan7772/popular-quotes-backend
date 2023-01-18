@@ -1,0 +1,8 @@
+{
+    "configurations": [{
+        "name": "Debug api",
+        "type": "node",
+        "request": "attach",
+        "port": 8001,
+      }]
+  }
