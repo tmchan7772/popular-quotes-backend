@@ -5,7 +5,8 @@
  * @param  {} next
  */
 function patchResponse(req, res, next) {
-  res.respond = (data = {}, success = true) => {
+  res.respond = (data = {}, success = true, status = 200) => {
+    res.status(status);
     res.json({
       success,
       data,

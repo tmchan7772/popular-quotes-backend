@@ -21,7 +21,7 @@ async function register(req, res, next) {
     }
 
     await userService.register(req.body);
-    res.respond();
+    res.respond({}, true, 201);
   } catch (err) {
     if (err.message === USER_ALREADY_EXISTS_ERROR) {
       next({ status: 409, isCustom: true, message: USER_ALREADY_EXISTS_ERROR });

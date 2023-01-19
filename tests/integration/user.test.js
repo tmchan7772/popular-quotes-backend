@@ -25,7 +25,7 @@ describe('User api', () => {
         password: '123456',
       };
 
-      await server.post('/register').send(user).expect(200);
+      await server.post('/register').send(user).expect(201);
 
       createdUser = await getUserByEmail(user.email);
 
@@ -39,7 +39,7 @@ describe('User api', () => {
         password: '123456',
       };
 
-      await server.post('/register').send(user).expect(200);
+      await server.post('/register').send(user).expect(201);
       createdUser = await getUserByEmail(user.email);
 
       await server.post('/register').send(user).expect(409);
