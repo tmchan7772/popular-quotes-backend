@@ -2,6 +2,7 @@
 - Install pgadmin. Create new database with name "popular-quotes" with schema "public"
 - Create your own .env file by copying .env_example file
 - Run: npx prisma db push - this will sync you db with model
+- Run: npx prisma generate - to update prisma client
 - Run: npm run seed - this will run seed data
 
 ### Run API
@@ -29,3 +30,7 @@
 
 #### Undo manual changes
 - npx prisma migrate reset
+
+### Run tests
+- Prepare database
+- Run: npm run test

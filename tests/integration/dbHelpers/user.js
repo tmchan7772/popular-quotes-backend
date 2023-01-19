@@ -1,14 +1,26 @@
 import chanceLib from 'chance';
-import dbClient from '../../src/database/client.js';
-import { hashString } from '../../src/utils/hash.js';
+import dbClient from '../../../src/database/client.js';
+import { hashString } from '../../../src/utils/hash.js';
 
 const chance = chanceLib.Chance();
+
+async function getUserByEmail(email) {
+  const [user] = await dbClient.user.findMany({
+    where: {
+      email: {
+        equals: email,
+      },
+    },
+  });
+
+  return user;
+}
 
 async function createUser() {
   const password = '123456';
   const { salt, hash } = hashString(password);
   const user = {
-    fullname: 'Test',
+    fullname: chance.name(),
     email: chance.email(),
     password: hash,
     salt,
@@ -24,11 +36,28 @@ async function createUser() {
 }
 
 function deleteUser(userId) {
-  return dbClient.user.delete({
+  if (!userId) {
+    return false;
+  }
+
+  // deleteMany to prevent error when user doesn't exist
+  return dbClient.user.deleteMany({
     where: {
       id: userId,
     },
   });
+}
+
+async function getUserToken(userId) {
+  const [token] = await dbClient.token.findMany({
+    where: {
+      user_id: {
+        equals: userId,
+      },
+    },
+  });
+
+  return token;
 }
 
 async function createUserToken(userId, expiredIn) {
@@ -56,7 +85,9 @@ async function createUserToken(userId, expiredIn) {
 }
 
 export {
+  getUserByEmail,
   createUser,
   deleteUser,
+  getUserToken,
   createUserToken,
 };

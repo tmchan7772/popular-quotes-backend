@@ -7,7 +7,7 @@
     "start": "node -r dotenv/config src/server.js",
     "dev": "nodemon --inspect=localhost:8001 src/server.js",
     "seed": "node prisma/seed/index.js",
-    "test": "mocha tests/**/*.js"
+    "test": "mocha \"tests/**/*.test.js\""
   },
   "author": "",
   "license": "ISC",

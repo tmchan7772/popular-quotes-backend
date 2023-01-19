@@ -1,8 +1,21 @@
 {
-    "configurations": [{
-        "name": "Debug api",
-        "type": "node",
-        "request": "attach",
-        "port": 8001,
-      }]
-  }
+    "configurations": [
+        {
+            "name": "Debug api",
+            "type": "node",
+            "request": "attach",
+            "port": 8001,
+        },
+        {
+            "name": "Debug tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": ["${workspaceFolder}/tests/**/*.test.js"],
+            "runtimeExecutable": "/Users/user/.nvm/versions/node/v19.4.0/bin/node",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ]
+}

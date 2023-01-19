@@ -1,5 +1,7 @@
-import assert from 'assert';
+import chai from 'chai';
 import validateRequiredFields from '../../../src/utils/validation.js';
+
+const { expect } = chai;
 
 describe('Utils.validation', () => {
   it('validateRequiredFields should return empty array', () => {
@@ -7,7 +9,7 @@ describe('Utils.validation', () => {
 
     const result = validateRequiredFields(obj, ['propA']);
 
-    assert.equal(result.length, 0);
+    expect(result.length).to.equal(0);
   });
 
   it('validateRequiredFields should return array for undefined props', () => {
@@ -16,7 +18,7 @@ describe('Utils.validation', () => {
 
     const result = validateRequiredFields(obj, ['propA', 'propB']);
 
-    assert.deepEqual(result, expectedResult);
+    expect(result).to.deep.equal(expectedResult);
   });
 
   it('validateRequiredFields should return array for null props', () => {
@@ -25,7 +27,7 @@ describe('Utils.validation', () => {
 
     const result = validateRequiredFields(obj, ['propA']);
 
-    assert.deepEqual(result, expectedResult);
+    expect(result).to.deep.equal(expectedResult);
   });
 
   it('validateRequiredFields should not return array for prop === 0', () => {
@@ -33,6 +35,6 @@ describe('Utils.validation', () => {
 
     const result = validateRequiredFields(obj, ['propA']);
 
-    assert.equal(result.length, 0);
+    expect(result.length).to.equal(0);
   });
 });

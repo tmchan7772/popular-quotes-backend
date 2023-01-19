@@ -1,10 +1,14 @@
+import { randomUUID } from 'crypto';
+
+const TOKEN_LIFE_TIME = process.env.TOKEN_LIFE_TIME || 1; // in hours
+
 function generateToken() {
-  // TODO; implmement
+  const token = Buffer.from(randomUUID()).toString('base64');
   const now = new Date();
-  now.setHours(now.getHours() + 1);
+  now.setHours(now.getHours() + TOKEN_LIFE_TIME);
 
   return {
-    value: 'abcd',
+    value: token,
     expiredIn: now.getTime(),
   };
 }
