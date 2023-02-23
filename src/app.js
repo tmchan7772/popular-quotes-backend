@@ -8,6 +8,7 @@ import setupUserRoutes from './user/routes.js';
 import setupAuthorRoutes from './author/routes.js';
 
 function createApp() {
+  console.log('app creation');
   const app = express();
 
   app.use(express.json());
