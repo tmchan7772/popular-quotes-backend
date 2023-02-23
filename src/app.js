@@ -12,9 +12,7 @@ function createApp() {
   const app = express();
 
   app.use(express.json());
-
   app.use(patchResponse);
-
   setupPublicInfoRoutes(app);
   setupUserRoutes(app);
   setupAuthorRoutes(app);
