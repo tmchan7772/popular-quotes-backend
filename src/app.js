@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 import patchResponse from './middlewares/respond.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
@@ -11,6 +12,7 @@ function createApp() {
   console.log('app creation');
   const app = express();
 
+  app.use(cors());
   app.use(express.json());
   app.use(patchResponse);
   setupPublicInfoRoutes(app);
