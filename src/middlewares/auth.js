@@ -13,11 +13,9 @@ async function verifyAuth(req, res, next) {
     if (user) {
       req.userId = user.userId;
       next();
-      return;
+    } else {
+      res.status(401).end();
     }
-
-    res.status(401).end();
-    return;
   }
 
   res.status(401).end();
