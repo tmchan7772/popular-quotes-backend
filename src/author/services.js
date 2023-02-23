@@ -27,11 +27,11 @@ async function getRandomQuote(authorId) {
     },
   };
 
-  const { _count } = await dbClient.quote.aggregate({
+  const { _count: count } = await dbClient.quote.aggregate({
     where: equalsToAuthorId,
     _count: true,
   });
-  const skip = Math.floor(Math.random() * _count);
+  const skip = Math.floor(Math.random() * count);
   const [quote] = await dbClient.quote.findMany({
     skip,
     take: 1,
