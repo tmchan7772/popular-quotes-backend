@@ -37,7 +37,6 @@ async function getRandomQuote(authorId) {
     take: 1,
     where: equalsToAuthorId,
   });
-
   return quote;
 }
 
